@@ -1,0 +1,93 @@
+{% extends "quotes_app/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <a href="{% url 'create' %}"
+       class="btn btn-dark  mb-3">
+        Create
+    </a>
+
+    <div class="list-group mb-3">
+        {% for quote in quotes %}
+        <div class="list-group-item mb-3  quote-item">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h5 class="mb-1"><em>{{ quote.quote }}</em></h5>
+                    <small class="text-muted">
+                        by {{ quote.author.fullname }}
+                        <a href="{% url 'author' quote.author.pk %}">(about)</a>
+                    </small>
+                    <br>
+                    Tags:
+                    {% for tag in quote.tags.all %}
+                    <a href="{% url 'quotes_by_tag' tag.id %}"
+                       class="badge bg-secondary text-decoration-none me-1">
+                        {{ tag.name }}
+                    </a>
+                    {% empty %}
+                    <span>No tags</span>
+                    {% endfor %}
+                </div>
+
+                <div class="d-flex flex-column">
+                    <a href="{% url 'edit' quote.pk %}"
+                       class="btn btn-sm btn-dark mb-1">
+                        Edit
+                    </a>
+                    <a href="{% url 'delete' quote.pk %}"
+                       class="btn btn-sm btn-outline-secondary">
+                        Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-info">
+            No quotes in base
+        </div>
+        {% endfor %}
+    </div>
+
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination pagination-lg justify-content-center">
+            <!-- Previous Button -->
+            <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+                {% if page_obj.has_previous %}
+                <a class="page-link bg-dark text-white"
+                   href="{% url 'index_paginated' page_obj.previous_page_number %}">
+                    &laquo; Previous
+                </a>
+                {% else %}
+                <span class="page-link bg-secondary text-white">&laquo; Previous</span>
+                {% endif %}
+            </li>
+
+            <!-- Page Numbers -->
+            {% for num in paginator.page_range %}
+            {% if num == page_obj.number %}
+            <li class="page-item active">
+                <span class="page-link bg-dark border-dark">{{ num }}</span>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link bg-secondary text-white"
+                   href="{% url 'index_paginated' num %}">{{ num }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+
+            <!-- Next Button -->
+            <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                {% if page_obj.has_next %}
+                <a class="page-link bg-dark text-white"
+                   href="{% url 'index_paginated' page_obj.next_page_number %}">
+                    Next &raquo;
+                </a>
+                {% else %}
+                <span class="page-link bg-secondary text-white">Next &raquo;</span>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}

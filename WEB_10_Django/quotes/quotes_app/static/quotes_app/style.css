@@ -1,0 +1,97 @@
+
+.page-link.bg-dark {
+    background-color: #343a40 !important;
+    border-color: #343a40 !important;
+}
+
+.page-link.bg-dark:hover {
+    background-color: #23272b !important;
+}
+
+.page-link.bg-secondary {
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+}
+
+.page-link.bg-secondary:hover {
+    background-color: #5a6268 !important;
+}
+
+.page-link.bg-light {
+    background-color: #f8f9fa !important;
+    border-color: #dee2e6 !important;
+}
+
+.page-item.active .page-link {
+    background-color: #495057 !important;
+    border-color: #495057 !important;
+}
+
+.list-group-item.quote-item {
+    background-color: #efefef; /* Светло-бежевый */
+    border-color: #000000; /* Серый бордер */
+    transition: all 0.3s ease; /* Плавные переходы */
+}
+
+.form-control {
+    transition: all 0.3s ease;
+    border: 1px solid #ced4da;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+/* Эффект при наведении */
+.form-control:hover {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);
+    background-color: #f8f9fa;
+}
+
+/* Эффект при фокусе */
+.form-control:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    background-color: #fff;
+}
+
+/* Стили для карточки */
+.card {
+    border-radius: 10px;
+    border: none;
+}
+
+/* Анимация кнопки */
+.btn-primary {
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.nav-link:hover {
+    transform: scale(1.1);
+    font-weight: 500;
+}
+
+/* Специальные стили для кнопки Logout */
+.btn-link.nav-link {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.btn-link.nav-link:hover {
+    transform: scale(1.1);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.badge.bg-secondary {
+    transition: background-color 0.2s ease;
+}
+
+.badge.bg-secondary:hover {
+    background-color: var(--bs-gray-700);
+}

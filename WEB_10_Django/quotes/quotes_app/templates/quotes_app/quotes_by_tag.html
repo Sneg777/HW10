@@ -1,0 +1,28 @@
+{% extends "quotes_app/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3>Quotes with tag: "{{ tag.name }}"</h3>
+    <a href="{% url 'index' %}" class="btn btn-dark mb-3">Back to all quotes</a>
+
+    <div class="list-group mb-3">
+        {% for quote in quotes %}
+        <div class="list-group-item mb-3 quote-item">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h5 class="mb-1"><em>{{ quote.quote }}</em></h5>
+                    <small class="text-muted">
+                        by {{ quote.author.fullname }}
+                        <a href="{% url 'author' quote.author.pk %}">(about)</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-info">
+            No quotes with this tag
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
