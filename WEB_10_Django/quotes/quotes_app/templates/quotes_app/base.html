@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Quotes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     {% load static %}
@@ -22,9 +22,17 @@
             <ul class="navbar-nav">
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <form action="{% url 'quotes_auth:logout' %}" method="post" class="d-inline">
+                    <form action="{% url 'quotes_auth:password_reset' %}" method="post" style="margin-right:  10px;">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-link nav-link text-light p-0 border-0 bg-transparent">
+                        <button type="submit" class="nav-link text-light btn btn-link p-0 border-0 bg-transparent">
+                            PasswordChange
+                        </button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="{% url 'quotes_auth:logout' %}" method="post" style="margin: 0;">
+                        {% csrf_token %}
+                        <button type="submit" class="nav-link text-light btn btn-link p-0 border-0 bg-transparent">
                             Logout
                         </button>
                     </form>

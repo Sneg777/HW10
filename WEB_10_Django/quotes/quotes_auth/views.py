@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
-from django.urls import reverse, reverse_lazy
-
 from .forms import RegisterForm
+from django.contrib.auth.views import PasswordResetConfirmView, PasswordResetView
+from django.contrib.auth import logout
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 
 class RegisterView(View):
@@ -33,3 +35,19 @@ class RegisterView(View):
         else:
             print("Form errors:", form.errors)
         return render(request, self.template_name, {"form": form})
+
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    success_url = reverse_lazy('quotes_auth:password_reset_complete')
+
+    def form_valid(self, form):
+        if self.request.user.is_authenticated:
+            logout(self.request)
+        return super().form_valid(form)
+
+
+class AuthenticatedPasswordResetView(LoginRequiredMixin, PasswordResetView):
+    login_url = reverse_lazy('quotes_auth:login')
+    template_name = 'quotes_auth/password_reset_form.html'
+    email_template_name = 'emails/password_reset_email.html'
+    success_url = reverse_lazy('quotes_auth:password_reset_done')

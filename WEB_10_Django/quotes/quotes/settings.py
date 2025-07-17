@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from decouple import config
 
 from pathlib import Path
+import environ
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+environ.Env.read_env(BASE_DIR / '.env')
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,11 +82,11 @@ WSGI_APPLICATION = "quotes.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
     }
 }
 
@@ -115,6 +122,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env.int('EMAIL_PORT')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_TIMEOUT = 10
+
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+
+
 STATIC_URL = "static/"
 
 LOGIN_URL = "/auth/login/"
@@ -124,3 +144,6 @@ LOGOUT_REDIRECT_URL = '/auth/login'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+
