@@ -10,6 +10,11 @@ Welcome to the Qoute_app basics on django Python. Down here is info how to use i
     POSTGRES_USER=
     POSTGRES_PASSWORD=
     POSTGRES_PORT=
+    EMAIL_HOST=
+    EMAIL_PORT=
+    EMAIL_HOST_USER=
+    EMAIL_HOST_PASSWORD=
+    DEFAULT_FROM_EMAIL=
 2.Run a Docker container according to 'docker_compose.yml' and make MongoDB container that have to contains at least 'localhost:27017'
 3.You need fill the MongoDB with running 'utils/add_quotes_to_mongo.py'
 4.You need to migrate all of the info from MongoDB to PostgreSQL. For it go to the directory quotes where 'manage.py' is, open a 'utils.migration.py' and run the command in terminal 'py -m utils.migration'.
